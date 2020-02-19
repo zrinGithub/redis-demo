@@ -1,0 +1,53 @@
+server:
+   port: 8080
+logging:
+   level:
+      com.zr.redisdemo.mapper: debug
+mybatis:
+   configuration:
+      map-underscore-to-camel-case: true
+   mapper-locations:
+      - classpath:mapper/*.xml
+
+spring:
+   application:
+      name: redis-demo
+   datasource:
+      # 数据库配置
+      url: jdbc:mysql://127.0.0.1:3306/fc_data?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&maxReconnects=10
+      username: root
+      password: 123456
+      # 数据库连接池
+      druid:
+         #初始化大小，最小，最大
+         initialSize: 10
+         minIdle: 1
+         maxActive: 50
+         # 配置获取连接等待超时的时间
+         maxWait: 60000
+         #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+         timeBetweenEvictionRunsMillis: 60000
+         #配置一个连接在池中最小生存的时间，单位是毫秒
+         minEvictableIdleTimeMillis: 30000
+         validationQuery: select?'x'
+         testWhileIdle: true
+         testOnBorrow: false
+         testOnReturn: false
+         #打开PSCache，并且指定每个连接上PSCache的大小
+         poolPreparedStatements: true
+         maxPoolPreparedStatementPerConnectionSize: 20
+         #配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+         filters: stat,wall,slf4j
+         #通过connectProperties属性来打开mergeSql功能；慢SQL记录
+         connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+
+
+   redis:
+      #Redis数据库索引(默认为0)
+      database: 0
+      #连接超时时间（毫秒） springboot2.0 中该参数的类型为Duration，这里在配置的时候需要指明单位
+      timeout: 20s
+      #密码
+      password: 123456
+      host: 192.168.199.101
+      port: 6379

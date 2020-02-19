@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zr.redisdemo.mapper.PlayerDao">
+    <sql id="Base_Column_List">
+    ID, CN_NAME as cnName, EN_NAME as enName, NATION as nation, BIRTH as birth, AGE as age, WEIGHT as weight, HEIGHT as height, TEAM_NAME as teamName
+    , POSITION as position, NUMBER as number
+    </sql>
+
+    <insert id="insert" parameterType="com.zr.redisdemo.bean.Player">
+    insert into player (CN_NAME, EN_NAME,
+      NATION, BIRTH, AGE, 
+      WEIGHT, HEIGHT, TEAM_NAME, 
+      POSITION, NUMBER)
+      values (#{cnName,jdbcType=VARCHAR}, #{enName,jdbcType=VARCHAR},
+      #{nation,jdbcType=VARCHAR}, #{birth,jdbcType=TIMESTAMP}, #{age,jdbcType=INTEGER}, 
+      #{weight,jdbcType=DECIMAL}, #{height,jdbcType=DECIMAL}, #{teamName,jdbcType=VARCHAR}, 
+      #{position,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER})
+    </insert>
+
+    <select id="selectAll"  resultType="com.zr.redisdemo.bean.Player">
+        select
+        <include refid="Base_Column_List"/>
+        from player
+    </select>
+
+    <select id="selectById"  resultType="com.zr.redisdemo.bean.Player">
+        select
+        <include refid="Base_Column_List"/>
+        from player
+        where ID = #{id}
+    </select>
+</mapper>
