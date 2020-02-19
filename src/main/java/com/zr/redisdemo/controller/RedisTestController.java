@@ -1,5 +1,6 @@
 package com.zr.redisdemo.controller;
 
+import com.zr.redisdemo.util.RedisUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -20,7 +21,9 @@ import javax.annotation.Resource;
 @RequestMapping("test")
 public class RedisTestController {
     @Resource
-    private RedisTemplate<String, String> redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
+    @Resource
+    private RedisUtil redisUtil;
 
     @GetMapping
     @ApiOperation("test")
@@ -31,7 +34,14 @@ public class RedisTestController {
     @GetMapping("/test/redis")
     @ApiOperation("RedisTestController")
     public String testRedis() {
-        redisTemplate.opsForValue().set("name","jerry");
-        return redisTemplate.opsForValue().get("name");
+        redisTemplate.opsForValue().set("name", "jerry");
+        return (String) redisTemplate.opsForValue().get("name");
+    }
+
+    @GetMapping("/test/redis2")
+    @ApiOperation("RedisTestController")
+    public String testRedis2() {
+        redisUtil.set("name2", "rick");
+        return (String) redisUtil.get("name2");
     }
 }
