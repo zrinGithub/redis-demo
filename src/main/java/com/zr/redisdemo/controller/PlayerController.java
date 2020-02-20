@@ -31,4 +31,10 @@ public class PlayerController {
         return playerService.selectById(id);
     }
 
+    @GetMapping("testCache/{id}")
+    @ApiOperation("id")
+    public void testCache(@PathVariable("id") Integer id) {
+        playerService.testCache(id);
+    }
+
 }

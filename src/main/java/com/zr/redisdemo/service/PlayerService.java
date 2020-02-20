@@ -7,5 +7,8 @@ import java.util.List;
 
 public interface PlayerService {
     List<Player> selectAll();
+
     Player selectById(Integer id);
+
+    void testCache(Integer id);
 }

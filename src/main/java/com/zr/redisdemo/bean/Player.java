@@ -2,11 +2,13 @@ package com.zr.redisdemo.bean;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
-public class Player {
+public class Player implements Serializable {
+    private static final long serialVersionUID = -2285867503722986289L;
     /**
      * 自增ID
      */
