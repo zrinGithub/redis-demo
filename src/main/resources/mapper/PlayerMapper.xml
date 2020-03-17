@@ -18,16 +18,62 @@
       #{position,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER})
     </insert>
 
-    <select id="selectAll"  resultType="com.zr.redisdemo.bean.Player">
+    <select id="selectAll" resultType="com.zr.redisdemo.bean.Player">
         select
         <include refid="Base_Column_List"/>
         from player
     </select>
 
-    <select id="selectById"  resultType="com.zr.redisdemo.bean.Player">
+    <select id="selectById" resultType="com.zr.redisdemo.bean.Player">
         select
         <include refid="Base_Column_List"/>
         from player
         where ID = #{id}
     </select>
+
+    <update id="update" parameterType="com.zr.redisdemo.bean.Player">
+        update player
+        <set>
+            <if test="cnName != null">
+                CN_NAME = #{cnName,jdbcType=VARCHAR},
+            </if>
+            <if test="enName != null">
+                EN_NAME = #{enName,jdbcType=VARCHAR},
+            </if>
+            <if test="nation != null">
+                NATION = #{nation,jdbcType=VARCHAR},
+            </if>
+            <if test="birth != null">
+                BIRTH = #{birth,jdbcType=TIMESTAMP},
+            </if>
+            <if test="age != null">
+                AGE = #{age,jdbcType=INTEGER},
+            </if>
+            <if test="weight != null">
+                WEIGHT = #{weight,jdbcType=DECIMAL},
+            </if>
+            <if test="height != null">
+                HEIGHT = #{height,jdbcType=DECIMAL},
+            </if>
+            <if test="teamName != null">
+                TEAM_NAME = #{teamName,jdbcType=VARCHAR},
+            </if>
+            <if test="position != null">
+                POSITION = #{position,jdbcType=VARCHAR},
+            </if>
+            <if test="number != null">
+                NUMBER = #{number,jdbcType=INTEGER},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from player
+        where ID = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteAll">
+        delete from player
+    </delete>
 </mapper>
