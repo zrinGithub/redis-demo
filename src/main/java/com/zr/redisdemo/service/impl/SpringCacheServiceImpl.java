@@ -72,10 +72,16 @@ public class SpringCacheServiceImpl {
         dao.deleteAll();
     }
 
-//    @Cacheable(value = "UserInfoList", keyGenerator = "simpleKeyGenerator")
-//    public Player findByIdTtl(String id) {
-//        System.err.println("根据id=" + id + "获取用户对象，从数据库中获取");
-//        Assert.notNull(id, "id不用为空");
-//        return this.userMapper.find(id);
-//    }
+    @Cacheable(value = "playerInfoCache", keyGenerator = "simpleKeyGenerator")
+    public Player selectByIdWithTtl(Integer id) {
+        System.out.println("根据id=" + id + "获取用户对象，从数据库中获取");
+        Assert.notNull(id, "id不能为空");
+        return dao.selectById(id);
+    }
+
+    public Player selectWithOutCache(Integer id) {
+        System.out.println("根据id=" + id + "获取用户对象，从数据库中获取");
+        Assert.notNull(id, "id不能为空");
+        return dao.selectById(id);
+    }
 }

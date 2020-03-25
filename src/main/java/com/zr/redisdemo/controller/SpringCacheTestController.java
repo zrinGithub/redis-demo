@@ -20,7 +20,19 @@ public class SpringCacheTestController {
 
     @GetMapping("select/{id}")
     @ApiOperation("select")
-    public Player selectAll(@PathVariable Integer id) {
+    public Player selectById(@PathVariable Integer id) {
         return cacheService.selectById(id);
+    }
+
+    @GetMapping("selectWithTtl/{id}")
+    @ApiOperation("select")
+    public Player selectWithTtl(@PathVariable Integer id) {
+        return cacheService.selectByIdWithTtl(id);
+    }
+
+    @GetMapping("selectWithOutCache/{id}")
+    @ApiOperation("select")
+    public Player selectWithOutCache(@PathVariable Integer id) {
+        return cacheService.selectWithOutCache(id);
     }
 }
