@@ -7,13 +7,11 @@ import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 
 /**
  * Description:
- * 排行榜接口
+ * 排行榜基础接口操作
  *
  * @author zhangr
  * 2020/3/26 13:45
@@ -45,9 +43,11 @@ public class RankListController {
         return rankListService.rankNum(uid);
     }
 
+    //查看全部：start=0,end=-1
     @GetMapping("scoreByRange")
     @ApiOperation("scoreByRange")
-    public Set<ZSetOperations.TypedTuple<Object>> scoreByRange(Integer start, Integer end) {
+    public Set<ZSetOperations.TypedTuple<Object>> scoreByRange(@RequestParam("start") Integer start,
+                                                               @RequestParam("end") Integer end) {
         return rankListService.rankWithScore(start, end);
     }
 }
