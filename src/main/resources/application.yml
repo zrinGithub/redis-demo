@@ -1,5 +1,5 @@
 server:
-   port: 8080
+   port: 8081
 logging:
    level:
       com.zr.redisdemo.mapper: debug
@@ -9,6 +9,11 @@ mybatis:
       cache-enabled: true
    mapper-locations:
       - classpath:mapper/*.xml
+
+customisation:
+   redis:
+      key:
+         printDate: dateKey
 
 spring:
    application:
